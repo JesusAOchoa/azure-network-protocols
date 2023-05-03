@@ -40,7 +40,6 @@ One of the requierement for this lab is to create our Resource Group and two (2)
 
 <p></p>
 
-If you need guidance on how to create VMs in Azure, you can see my tutorial on it [here](https://github.com/afisaminou/Create-an-Azure-Account-and-Deploy-a-Virtual-Machine).
 
 <p></p>
 
