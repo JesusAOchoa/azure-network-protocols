@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://i.imgur.com/Ua7udoS.png" alt="Traffic Examination"/>
+<img src="https://imgur.com/y5qHXey.png" alt="Traffic Examination"/>
 </p>
 
 <h1>Network Security Groups (NSGs) and Inspecting Traffic Between Azure Virtual Machines</h1>
@@ -64,7 +64,6 @@ Once Wireshark downloaded and Installed in Windows 10 VM (VM1), I opened and fil
 
 <br />
 <p>
-<img src="https://i.imgur.com/78h2KX8.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
 <h3>Step 4: </h3>
@@ -76,7 +75,7 @@ Now, after I Initiated a perpetual/non-stop ping from our Windows 10 VM to our U
 </p>
 Observe the ping request times out after the firewall rule was put in place (*note - The ping request timed out due to the ICMP traffic being denied as the firewall rule blocked the traffic).
 <br />
-<img src="https://i.imgur.com/1qmVWEA.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+
 </p>
 <p>
 Back to VM2’s Network Security Group to "Allow" the Inbound Security Rule that was set up to deny so the incoming ICMP traffic would be allowed to VM2 again. We can see that Re-enable ICMP traffic for the Network Security Group in Ubuntu VM bring back ping requests and replies within wireshark. Now we can stop the ping activity by preessing "Control" + "C".
@@ -101,15 +100,13 @@ To observe DHCP (Dynamic Host Configuration Protocol) traffic which is the netwo
 <p></p>
 In Wireshark, I filtered for DNS (Domain Name System)  traffic and used the “nslookup” command for www.nike.com. This command basically asks our DNS server what is nike's IP address. DNS is the network protocol that transforms Fully Qualified Domain Names (FQDNs) into their assigned IP addresses.
 <br />
-<img src="https://i.imgur.com/3GeBfeC.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <p>
 <h3>Step 8: Observe RDP Traffic </h3>
 <p></p>
  Finally, I will filter for RDP (Remote Desk Protocol) traffic by using the TCP port number (tcp.port==3389). RDP is the protocol that allows the remote connection to another computer and complete control of the Graphical User Interface (GUI). RDP traffic was continually generated 
 <br />
-<img src="https://i.imgur.com/bfO6tMe.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 Thank you for checking out this tutorial. It should have helped you gain a better understanding of network protocols and how network traffic works.
 
 
-**REMEMBER TO DELETE YOUR RESOURCES ONCE YOU ARE DONE WITH THE LAB!**
+**REMEMBER TO DELETE YOUR RESOURCES AS TO NOT EAT UP YOUR CREDIT  **
