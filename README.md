@@ -36,7 +36,8 @@ Re-enable ICMP traffic for the Network Security Group assigned to your Ubuntu VM
 <p>
 
 <h3>Step 1: Create Resource Groups and Virtual Machines</h3>
-One of the requierement for this lab is to create our Resource Group and two (2) VMs on Azure. One machine will be a Windows 10 (VM1) and the other will be a Linux machine (VM2).<br/>
+
+As part of this lab's prerequisites, we need to set up a Resource Group and deploy two (2) virtual machines (VMs) in Azure. VM1 will be a Windows 10 machine, while VM2 will be a Linux machine.<br/>
 
 <p></p>
 
@@ -49,10 +50,10 @@ One of the requierement for this lab is to create our Resource Group and two (2)
 <img src="https://i.imgur.com/jIrniNI.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 
-<h3>Step 2: Download Wireshark via RDP on Windows Virtual Machine (VM1) </h3>
+<h3>Step 2: Download Wireshark on Windows Virtual Machine (VM1) </h3>
 <p></p>
 
-Use Remote Desktop to connect to our Windows 10 Virtual Machine (VM1) using the Public IP address and Install [Wireshark](https://www.wireshark.org/download.html) in there.
+Use Remote Desktop to connect to your Windows Virtual Machine using the Public IP address and Install [Wireshark](https://www.wireshark.org/download.html).
 <p
 
 <p></p>
@@ -60,7 +61,7 @@ Use Remote Desktop to connect to our Windows 10 Virtual Machine (VM1) using the 
 <img src="https://i.imgur.com/Vq6wpon.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
 <h3>Step 3: Observe ICMP Traffic</h3>
-Once Wireshark downloaded and Installed in Windows 10 VM (VM1), I opened and filtered for ICMP traffic only. Then using Powershell and the private IP address of the Ubuntu VM (VM2) I attempted to ping it from within the Windows 10 VM and Observed ping requests and replies within Wireshark from both Virtual Machines.
+After successfully downloading and installing Wireshark on the Windows 10 VM (VM1), I launched the application and applied a filter to display only ICMP traffic. Next, using PowerShell and the private IP address of the Ubuntu VM (VM2), I initiated a ping from within the Windows 10 VM. Consequently, I observed both the ping requests and replies within Wireshark, monitoring the network activity of both virtual machines.
 
 <br />
 <p>
@@ -69,44 +70,44 @@ Once Wireshark downloaded and Installed in Windows 10 VM (VM1), I opened and fil
 <h3>Step 4: </h3>
 <p></p>
  
-Now, after I Initiated a perpetual/non-stop ping from our Windows 10 VM to our Ubuntu/Linux VM, let's Open the Network Security Group using by the Ubuntu VM, disable incoming (inbound) ICMP traffic and observe the ICMP traffic in WireShark and the command line Ping activity.
+Having initiated an uninterrupted ping from our Windows 10 VM to the Ubuntu/Linux VM, we will now access the Network Security Group associated with the Ubuntu VM. From there, we will disable the incoming (inbound) ICMP traffic. As we disable the ICMP traffic, we will closely monitor both the ICMP traffic within Wireshark and the command line Ping activity.
 <br/>
 <img src="https://i.imgur.com/VLuPiCJ.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
-Observe the ping request times out after the firewall rule was put in place (*note - The ping request timed out due to the ICMP traffic being denied as the firewall rule blocked the traffic).
+Observe how the ping request times out after the firewall rule was put in place (*note - The ping request timed out due to the ICMP traffic being denied as the firewall rule blocked the traffic).
 <br />
 
 </p>
 <p>
-Back to VM2’s Network Security Group to "Allow" the Inbound Security Rule that was set up to deny so the incoming ICMP traffic would be allowed to VM2 again. We can see that Re-enable ICMP traffic for the Network Security Group in Ubuntu VM bring back ping requests and replies within wireshark. Now we can stop the ping activity by preessing "Control" + "C".
+Returning to VM2's Network Security Group, we will modify the Inbound Security Rule that was previously set to deny, allowing incoming ICMP traffic once again. By re-enabling ICMP traffic for the Network Security Group on the Ubuntu VM, we can observe the resumption of ping requests and replies within Wireshark. Finally, we can stop the ongoing ping activity by pressing "Control" + "C".
 <br />
 <img src="https://i.imgur.com/Tcu7L1u.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 </p>
-<h3>Step 5: Observe SSH Traffic </h3>
+<h3>Step 5: Observe the behavior of SSH Traffic </h3>
 <p></p>  
   
-I then filtered for SSH (Secure Shell) traffic in Wireshark and used the PowerShell terminal to “SSH into” VM2. Connecting to VM2 using SSH, along with typing and executing commends, generated SSH packets that could be observed in Wireshark. Using the “exit” command to end the SSH session.
+Next, I applied a filter in Wireshark to display only SSH (Secure Shell) traffic. Simultaneously, within the PowerShell terminal, I initiated an SSH connection to VM2. Through this SSH connection, I executed commands, generating SSH packets that were observable in Wireshark. To conclude the SSH session, I used the "exit" command.
 <br />
 <img src="https://i.imgur.com/gD7kvlG.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <p>
 <h3>Step 6: Observe DHCP Traffic </h3>
 <p></p>
  
-To observe DHCP (Dynamic Host Configuration Protocol) traffic which is the network protocol responsible for automatically assigning IP addresses, let's filter for DHCP traffic in Wireshark and used the “ipconfig /renew” command to attempt to issue a new IP address to VM1. Although the private IP address did not change, Wireshark shows that there was a request and acknowledgement, so DHCP traffic was generated.
+To monitor DHCP (Dynamic Host Configuration Protocol) traffic, which handles the automatic assignment of IP addresses, we will apply a DHCP filter in Wireshark. Additionally, we will utilize the "ipconfig /renew" command within VM1 to attempt obtaining a new IP address. While the private IP address may not have changed, Wireshark will reveal both the request and acknowledgment, indicating the generation of DHCP traffic.
 <br />
 <img src="https://i.imgur.com/1COIRiA.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <p>
 <h3>Step 7: Observe DNS Traffic </h3>
 <p></p>
-In Wireshark, I filtered for DNS (Domain Name System)  traffic and used the “nslookup” command for www.nike.com. This command basically asks our DNS server what is nike's IP address. DNS is the network protocol that transforms Fully Qualified Domain Names (FQDNs) into their assigned IP addresses.
+Within Wireshark, I applied a filter to display DNS (Domain Name System) traffic. I then executed the "nslookup" command, specifically for www.nike.com. This command essentially queries our DNS server to retrieve the IP address associated with the domain name "nike.com". DNS is the network protocol responsible for transforming Fully Qualified Domain Names (FQDNs) into their respective assigned IP addresses.
 <br />
 <p>
 <h3>Step 8: Observe RDP Traffic </h3>
 <p></p>
- Finally, I will filter for RDP (Remote Desk Protocol) traffic by using the TCP port number (tcp.port==3389). RDP is the protocol that allows the remote connection to another computer and complete control of the Graphical User Interface (GUI). RDP traffic was continually generated 
+Lastly, I applied a filter in Wireshark to display RDP (Remote Desktop Protocol) traffic, specifically by utilizing the TCP port number (tcp.port==3389). RDP is the protocol that enables remote connections to other computers, granting full control over the Graphical User Interface (GUI). Throughout the observation, a consistent generation of RDP traffic was observed.
 <br />
 </p>
-Thank you for checking out this tutorial. It should have helped you gain a better understanding of network protocols and how network traffic works.
+Thank you for checking out this tutorial, I hope it helped you understand traffic between computers more!
 
 
 **REMEMBER TO DELETE YOUR RESOURCES AS TO NOT EAT UP YOUR CREDIT  **
